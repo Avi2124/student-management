@@ -1,6 +1,4 @@
-package.json
 .env
-package-lock.json
 college.sql
 node_modules
 uploads
