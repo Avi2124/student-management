@@ -1,6 +1,8 @@
 import pool from "../config/db.js";
 
 export const login = async (req, res, next) => {
+    console.log("Login Route Hit");
+    console.log("Body:", req.body);
     try {
         const {email, password} = req.body;
             const [users] = await pool.execute("SELECT * FROM users WHERE email=? AND password=?", [email, password]);
