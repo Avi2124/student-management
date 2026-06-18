@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Student Management</title>
+  </head>
+  <body>
+    <h1>Student Management System</h1>
+    <button onclick="getStudents()">Load Students</button>
+    <pre id="result"></pre>
+    <script>
+      async function getStudents() {
+        const response = await fetch("/api/students?page=1&limit=5");
+        const data = await response.json();
+        document.getElementById("result").innerText = JSON.stringify(
+          data,
+          null,
+          2,
+        );
+      }
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      socket.emit("message", "Hello Server");
+      socket.on("message", (msg) => {
+        console.log(msg);
+      });
+    </script>
+  </body>
+</html>
