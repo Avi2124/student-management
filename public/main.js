@@ -77,7 +77,8 @@ async function loadStudents(p = 1){
     const search = document.getElementById("search").value;
     const city = document.getElementById("cityFilter").value;
 
-    const res = await fetch(`/api/students?page=1&limit=5&city=Surat&search=avi&sort=name`,
+    const res = await fetch(
+        `/api/students?page=${page}&limit=${limit}&city=${city}&search=${search}`,
         { credentials: "include" }
     );
 
@@ -87,10 +88,6 @@ async function loadStudents(p = 1){
 
     let rows = "";
 
-    if (!data || !data.data) {
-    console.error("Invalid response:", data);
-    return;
-}
     data.data.forEach(s => {
         rows += `
         <tr>
