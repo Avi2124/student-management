@@ -87,6 +87,10 @@ async function loadStudents(p = 1){
 
     let rows = "";
 
+    if (!data || !data.data) {
+    console.error("Invalid response:", data);
+    return;
+}
     data.data.forEach(s => {
         rows += `
         <tr>
