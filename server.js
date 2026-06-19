@@ -15,6 +15,7 @@ import errorMiddleware from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 const app = express();
+app.set("trust proxy", 1);
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
@@ -34,7 +35,12 @@ app.use(loggerMiddleware)
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production"
+    }
 }));
 
 app.use(fileUpload());

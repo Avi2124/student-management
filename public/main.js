@@ -46,7 +46,8 @@ async function login(){
 
 async function logout(){
 
-    await fetch("/api/logout", {
+    await fetch("/api/auth/logout", {
+        method: "GET",
         credentials: "include"
     });
 
@@ -69,6 +70,29 @@ async function addStudent(){
 
     loadStudents(page);
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    try {
+        const res = await fetch("/api/auth/check-auth", {
+            credentials: "include"
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("app").style.display = "block";
+
+            loadStudents(1);
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+
+});
 
 async function loadStudents(p = 1){
 
