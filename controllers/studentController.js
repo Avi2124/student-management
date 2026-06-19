@@ -70,8 +70,8 @@ export const getStudents = async (req, res, next) => {
       sort = "id";
     }
 
-    query += ` ORDER BY ${sort} LIMIT ${limit} OFFSET ${offset}`;
-    values.push(limit, offset);
+    query += ` ORDER BY ${sort} LIMIT ${Number(limit)} OFFSET ${Number(offset)}`;
+    // values.push(limit, offset);
 
     const [students] = await pool.execute(query, values);
 
