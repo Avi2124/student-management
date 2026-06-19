@@ -1,18 +1,117 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Student Management</title>
+<meta charset="UTF-8">
+<title>Student Management System</title>
+
+<style>
+body{
+    font-family: Arial;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card{
+    border:1px solid #ddd;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+}
+
+input, button{
+    padding:10px;
+    margin:5px;
+}
+
+table{
+    width:100%;
+    border-collapse: collapse;
+}
+
+th, td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+th{
+    background:#f4f4f4;
+}
+
+#app{
+    display:none;
+}
+
+#loginBox{
+    max-width:400px;
+    margin:auto;
+}
+</style>
 </head>
+
 <body>
 
-  <h1>Student Management System</h1>
+<h1>🎓 Student Management System</h1>
 
-  <button id="loadBtn">Load Students</button>
+<!-- LOGIN -->
+<div id="loginBox" class="card">
+    <h3>Login</h3>
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button id="loginBtn">Login</button>
+</div>
 
-  <pre id="result"></pre>
+<!-- APP -->
+<div id="app">
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/main.js"></script>
+    <button id="logoutBtn">Logout</button>
+
+    <!-- ADD STUDENT -->
+    <div class="card">
+        <h3>Add Student</h3>
+
+        <input type="text" id="name" placeholder="Name">
+        <input type="number" id="age" placeholder="Age">
+        <input type="text" id="city" placeholder="City">
+        <input type="file" id="photo">
+
+        <button id="addBtn">Add</button>
+    </div>
+
+    <!-- SEARCH + FILTER -->
+    <div class="card">
+        <input type="text" id="search" placeholder="Search by name">
+        <input type="text" id="cityFilter" placeholder="Filter by city">
+        <button id="filterBtn">Apply</button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Photo</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="table"></tbody>
+        </table>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="card">
+        <button id="prevBtn">⬅ Prev</button>
+        <span id="pageNo">1</span>
+        <button id="nextBtn">Next ➡</button>
+    </div>
+
+</div>
+
+<script src="/main.js"></script>
 
 </body>
 </html>
